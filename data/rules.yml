@@ -1,0 +1,43 @@
+version: "3.1"
+
+rules:
+- rule: get started
+  conversation_start: true
+  steps:
+  - intent: welcome
+  - action: utter_welcome
+
+- rule: greet the user
+  steps:
+  - intent: say_greet
+  - action: utter_greet
+
+- rule: say goodbye
+  steps:
+  - intent: say_goodbye
+  - action: utter_goodbye
+
+- rule: show menu
+  steps:
+  - intent: request_menu
+  - action: utter_menu
+
+- rule: show prices
+  steps:
+  - intent: request_prices
+  - action: utter_prices
+
+- rule: order
+  steps:
+  - intent: place_order
+  - action: utter_order
+
+- rule: say anytime
+  steps:
+  - intent: say_thanks
+  - action: utter_anytime
+
+- rule: nlu fallback handling
+  steps:
+  - intent: nlu_fallback
+  - action: utter_ask_rephrase

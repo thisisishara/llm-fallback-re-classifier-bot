@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #9FA8DA;
+        }
+    </style>
+</head>
+
+<body>
+    <div
+            id="rasa-chat-widget"
+            data-websocket-url="http://host.docker.internal/"
+            data-initial-payload="/welcome"
+            data-avatar-url="https://i.imgur.com/PtWDcQ1.png"
+            data-avatar-background="#FFCC80"
+            data-default-open="true"
+    ></div>
+    <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
+</body>
+
+</html>
