@@ -111,6 +111,7 @@ class LLMFallbackReClassifier(GraphComponent, IntentClassifier):
             )
 
             # logging the initial intent ranking list
+            logger.info("Initial intent ranking:")
             _log_intent_ranking(intent_ranking=message.data[INTENT_RANKING_KEY])
 
             text = message.data.get(TEXT_KEY, "")
@@ -154,6 +155,7 @@ class LLMFallbackReClassifier(GraphComponent, IntentClassifier):
                 )
 
                 # logging the new intent ranking list
+                logger.info("New intent ranking:")
                 _log_intent_ranking(intent_ranking=message.data[INTENT_RANKING_KEY])
 
         return messages
@@ -328,4 +330,6 @@ def _extract_llm_classification(choices: Dict) -> Optional[Text]:
 
 
 def _log_intent_ranking(intent_ranking: Dict):
-    pass
+    for intent in intent_ranking:
+        logger.info(f"name: {intent.get('name')}\nconfidence: {intent.get('confidence')}")
+    logger.info("")
