@@ -110,6 +110,9 @@ class LLMFallbackReClassifier(GraphComponent, IntentClassifier):
                 f"decision will be handed over to the LLM."
             )
 
+            # logging the initial intent ranking list
+            _log_intent_ranking(intent_ranking=message.data[INTENT_RANKING_KEY])
+
             text = message.data.get(TEXT_KEY, "")
             intents = [
                 intent.get(NAME_KEY)
@@ -149,6 +152,9 @@ class LLMFallbackReClassifier(GraphComponent, IntentClassifier):
                         intent=llm_classification, confidence=confidence
                     ),
                 )
+
+                # logging the new intent ranking list
+                _log_intent_ranking(intent_ranking=message.data[INTENT_RANKING_KEY])
 
         return messages
 
@@ -312,10 +318,14 @@ classes: [{{intents}}]"""
 def _extract_llm_classification(choices: Dict) -> Optional[Text]:
     try:
         choice = choices[0].get("text", "")
-        logger.info(f"LLM classification: \n{choice}\n")
+        logger.info(f"LLM classification: {choice}")
 
         response_json = json.loads(choice)
         return response_json.get("intent", "")
     except Exception as e:
         logger.exception(f"Error occurred while extracting the LLM response. {e}")
         return ""
+
+
+def _log_intent_ranking(intent_ranking: Dict):
+    pass
