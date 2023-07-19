@@ -1,0 +1,31 @@
+recipe: default.v1
+
+assistant_id: llm_fallback_re_classifier_bot
+
+language: en
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+  - name: EntitySynonymMapper
+  - name: custom.nlu.classifiers.llm_fallback_re_classifier.LLMFallbackReClassifier
+    threshold: 0.9
+    ambiguity_threshold: 0.1
+    model: text-davinci-003
+    temperature: 0
+    max_tokens: 1000
+
+policies:
+  - name: MemoizationPolicy
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+  - name: RulePolicy
