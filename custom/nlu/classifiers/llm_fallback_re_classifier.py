@@ -331,5 +331,6 @@ def _extract_llm_classification(choices: Dict) -> Optional[Text]:
 
 def _log_intent_ranking(intent_ranking: Dict):
     for intent in intent_ranking:
-        logger.info(f"name: {intent.get('name')}\nconfidence: {intent.get('confidence')}")
+        logger.info(f"name: {intent.get('name')}")
+        logger.info(f"name: {intent.get('confidence')}")
     logger.info("")
